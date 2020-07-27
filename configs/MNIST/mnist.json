@@ -1,0 +1,27 @@
+{
+    "clients": {
+        "total": 100,
+        "fraction": 0.1
+    },
+    "data": {
+        "loading": "static",
+        "partition": {
+            "size": 600
+        },
+        "IID": true
+    },
+    "federated_learning": {
+        "rounds": 1000,
+        "target_accuracy": 0.99,
+        "task": "train",
+        "epochs": 5,
+        "batch_size":10,
+        "lr": 0.1
+    },
+    "dataset": "MNIST",
+    "paths": {
+        "data": "./dataset",
+        "model": "./models"
+    },
+    "server": "basic"
+}
