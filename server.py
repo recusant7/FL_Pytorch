@@ -18,27 +18,28 @@ class Server:
 
     def run(self):
         self.connect_clients()
+        # communication rounds
         for round in (range(1, self.config.fl.rounds + 1)):
             logging.info("-" * 22 + "round {}".format(round) + "-" * 30)
+            # select clients which participate training
             selected = self.clients_selection()
             logging.info("selected clients:{}".format(selected))
             info = self.clients.train(selected)
 
-            # update glob model
             logging.info("aggregate weights")
+            # update glob model
             glob_weights = self.fed_avg(info)
             self.model.load_state_dict(glob_weights)
             train_acc = self.getacc(info)
             test_acc, test_loss = self.test()
             logging.info(
                 "training acc: {:.4f},test acc: {:.4f}, test_loss: {:.4f}\n".format(train_acc, test_acc, test_loss))
-
             if test_acc > self.config.fl.target_accuracy:
                 self.target_round = round
                 logging.info("target achieved")
                 break
 
-            # broadcast
+            # broadcast glob weights
             self.clients.update(glob_weights)
 
     def fed_avg(self, info):
@@ -53,6 +54,7 @@ class Server:
         return w_avg
 
     def clients_selection(self):
+        # randomly selection
         frac = self.config.clients.fraction
         n_clients = max(1, int(self.config.clients.total * frac))
         training_clients = np.random.choice(self.client_index, n_clients, replace=False)

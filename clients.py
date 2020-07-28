@@ -89,6 +89,7 @@ class Client:
                    selected_client]
         [t.start() for t in threads]
         [t.join() for t in threads]
+        # training details
         info = {"weights": self.weights, "loss": self.epoch_loss, "corrects": self.running_corrects,
                 'len': self.len_dataset}
         return self.upload(info)

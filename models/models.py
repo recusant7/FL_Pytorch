@@ -1,6 +1,5 @@
-from torch import nn
 import torch.nn.functional as F
-from torch.utils.data import dataset
+from torch import nn
 
 
 def get_model(dataset_name):
