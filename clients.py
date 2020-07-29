@@ -23,7 +23,7 @@ class Client:
     def load_data(self):
         self.trainset, self.testset = get_data(self.config.dataset, self.config)
         for subset in self.trainset:
-            loader = DataLoader(subset, batch_size=self.config.fl.batch_size, shuffle=True)
+            loader = DataLoader(subset, batch_size=self.config.fl.batch_size)
             self.dataloaders.append(loader)
 
     def clients_to_server(self):

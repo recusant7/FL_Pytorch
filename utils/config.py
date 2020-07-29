@@ -37,15 +37,6 @@ class Config(object):
                   for i, field in enumerate(fields)]
         self.data = namedtuple('data', fields)(*params)
 
-        # Determine correct data loader
-        assert self.data.IID ^ bool(self.data.bias) ^ bool(self.data.shard)
-        if self.data.IID:
-            self.loader = 'basic'
-        elif self.data.bias:
-            self.loader = 'bias'
-        elif self.data.shard:
-            self.loader = 'shard'
-
         # -- Federated learning --
         fields = ['rounds', 'target_accuracy', 'task', 'epochs', 'batch_size', 'lr']
         defaults = (0, None, 'train', 0, 0, 0.01)
@@ -72,4 +63,4 @@ class Config(object):
 
 if __name__ == "__main__":
     config = Config("configs/MNIST/mnist.json")
-    print(config.data.partition['size'])
+    print(config.data.IID)
