@@ -17,7 +17,16 @@ git clone https://github.com/recusant7/FL_Pytorch
 cd FL_Pytorch/
 mkdir dataset
 ```
-
+## Data partition
+According to the method in the article, we randomly split the training set and partitioned into 100 clients averagely by
+using this code:
+```python
+length = [total_sample // total_clients] * total_clients
+    if IID:
+        spilted_train = torch.utils.data.random_split(self.trainset, length)
+```
+As well, sorting the samples by label and dividing them into 200 groups are used to produce the Non-IID data. Each of 100
+clients recieve 2 groups and as most clients will only have  2 kinds of digit.
 ## Train
 ### Usage
 ```
@@ -54,7 +63,8 @@ python main.py -c configs/MNIST/mnist.json -l info
 ```
 ## Results
 Number of communication rounds to reach accuracy of 99% on test dataset of MNIST,
-where B is the local minibatch size, E is the number of local epochs.
+where B is the local minibatch size, E is the number of local epochs. The learning rate is 
+sensitive, we use learning of 0.1 when the data is IID and 0.01 of non-IID.
 
 
 
