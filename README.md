@@ -26,7 +26,7 @@ length = [total_sample // total_clients] * total_clients
         spilted_train = torch.utils.data.random_split(self.trainset, length)
 ```
 As well, sorting the samples by label and dividing them into 200 groups are used to produce the Non-IID data. Each of 100
-clients recieve 2 groups and as most clients will only have  2 kinds of digit.
+clients recieve 2 groups and as most clients will only have   2 kinds of digit.
 ## Train
 ### Usage
 ```
@@ -68,9 +68,9 @@ sensitive, we use learning of 0.1 when the data is IID and 0.01 of non-IID.
 
 
 
- |      | E|  B  |IID|
- | --------   | -----:   | :----: |:----:|
- | FedAvg (paper)     | 5    |   10  |20|
- | this implementation       | 5  |  10    |14|
- | FedAvg (paper)       | 5     |   50 |29|
-  | this implementation       | 5  |  50    |30|
+ |      | E|  B  |IID| None-IID|
+ | --------   | -----:   | :----: |:----:|:----:|
+ | FedAvg (paper)     | 5    |   10  |29|229
+ |      | 5  |  50    |30|
+ | this implementation      | 5     |   10 |20|229
+  |       | 5  |  50    |30|-
