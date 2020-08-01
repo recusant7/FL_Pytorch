@@ -72,5 +72,5 @@ sensitive, we use learning of 0.1 when the data is IID and 0.01 of non-IID.
  | --------   | -----:   | :----: |:----:|:----:|
  | FedAvg (paper)     | 5    |   10  |29|229
  |      | 5  |  50    |30|
- | this implementation      | 5     |   10 |20|229
+ | this implementation      | 5     |   10 |14|214
   |       | 5  |  50    |30|-
